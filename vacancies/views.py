@@ -1,3 +1,4 @@
+from django.http import HttpResponseNotFound, HttpResponseServerError
 from django.views.generic import ListView, DetailView
 
 from vacancies.models import Company, Vacancy, Specialty
@@ -27,3 +28,11 @@ class CompanyView(DetailView):
 class VacancyView(DetailView):
     model = Vacancy
     template_name = 'vacancies/vacancy.html'
+
+
+def page_not_found(request, exception):
+    return HttpResponseNotFound('По данному адресу страницы не существует!')
+
+
+def server_error(request):
+    return HttpResponseServerError('Простите, извините...у нас что-то поломалось!')
