@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Company(models.Model):
@@ -12,6 +13,12 @@ class Company(models.Model):
         verbose_name = 'Компания'
         verbose_name_plural = 'Компании'
 
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('company', args=[self.pk])
+
 
 class Specialty(models.Model):
     code = models.SlugField(max_length=50, unique=True, db_index=True, verbose_name='код')
@@ -21,6 +28,12 @@ class Specialty(models.Model):
     class Meta:
         verbose_name = 'Специализация'
         verbose_name_plural = 'Специализации'
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('specialty', args=[self.code])
 
 
 class Vacancy(models.Model):
@@ -36,3 +49,9 @@ class Vacancy(models.Model):
     class Meta:
         verbose_name = 'Вакансия'
         verbose_name_plural = 'Вакансии'
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('vacancy', args=[self.pk])

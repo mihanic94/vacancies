@@ -20,7 +20,7 @@ class VacanciesSpecialty(ListView):
     template_name = 'vacancies/vacancies.html'
 
 
-class CompanyView(DetailView):
+class CompanyView(ListView):
     model = Company
     template_name = 'vacancies/company.html'
 
