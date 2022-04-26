@@ -1,4 +1,4 @@
-from django.http import HttpResponseNotFound, HttpResponseServerError
+from django.http import HttpResponseNotFound, HttpResponseServerError, Http404
 from django.views.generic import ListView, DetailView
 
 from vacancies.models import Company, Vacancy, Specialty
@@ -32,7 +32,10 @@ class VacanciesSpecialty(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = Specialty.objects.get(code=self.kwargs['specialty_code']).title
+        try:
+            context['title'] = Specialty.objects.get(code=self.kwargs['specialty_code']).title
+        except Exception:
+            raise Http404
         return context
 
 
@@ -46,7 +49,10 @@ class CompanyView(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['company'] = Company.objects.get(pk=self.kwargs['company_id'])
+        try:
+            context['company'] = Company.objects.get(pk=self.kwargs['company_id'])
+        except Exception:
+            raise Http404
         return context
 
 

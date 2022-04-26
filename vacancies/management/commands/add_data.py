@@ -4,9 +4,10 @@ from django.core.management.base import BaseCommand
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
+        from datetime import date
+
         from vacancies.models import Company, Specialty, Vacancy
         from vacancies.data import jobs, companies, specialties
-        from datetime import date
 
         for company in companies:
             company_instance = Company()
