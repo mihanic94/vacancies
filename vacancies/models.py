@@ -38,7 +38,8 @@ class Specialty(models.Model):
 
 class Vacancy(models.Model):
     title = models.CharField(max_length=50, verbose_name='название')
-    specialty = models.ForeignKey(Specialty, on_delete=models.PROTECT, related_name='vacancies', verbose_name='специализация')
+    specialty = models.ForeignKey(Specialty, on_delete=models.PROTECT, related_name='vacancies',
+                                  verbose_name='специализация')
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='vacancies', verbose_name='компания')
     skills = models.TextField(verbose_name='навыки')
     description = models.TextField(verbose_name='описание')
